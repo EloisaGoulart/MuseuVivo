@@ -1,0 +1,209 @@
+.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease-in;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.image-modal-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--museum-black);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  z-index: 10000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.image-modal-close:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+/* Controles de Zoom */
+.zoom-controls {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 1rem;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+}
+
+.zoom-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--museum-moss-green);
+  color: white;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.zoom-btn:hover {
+  background: var(--museum-moss-dark);
+  transform: scale(1.1);
+}
+
+.zoom-level {
+  min-width: 60px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--museum-black);
+  font-size: 0.95rem;
+}
+
+.zoom-reset {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--museum-moss-green);
+  background: white;
+  color: var(--museum-moss-green);
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin-left: 0.25rem;
+}
+
+.zoom-reset:hover {
+  background: var(--museum-moss-green);
+  color: white;
+}
+
+.zoom-hint {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  z-index: 10001;
+  pointer-events: none;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.image-modal-content {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.image-modal-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transform-origin: center center;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .image-modal-overlay {
+    padding: 1rem;
+  }
+
+  .image-modal-close {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .zoom-controls {
+    top: auto;
+    bottom: 5rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .zoom-btn, .zoom-reset {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+
+  .zoom-level {
+    font-size: 0.85rem;
+    min-width: 50px;
+  }
+
+  .zoom-hint {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    bottom: 1rem;
+  }
+
+  .image-modal-img {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+}

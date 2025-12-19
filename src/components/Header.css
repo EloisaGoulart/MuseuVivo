@@ -1,0 +1,172 @@
+/* ============================================
+   ESTILOS DO HEADER - TEMA MUSEU CLÁSSICO
+   ============================================ */
+
+.header {
+  background: var(--museum-white);
+  color: var(--museum-black);
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-bottom: 3px solid var(--museum-moss-green);
+  position: relative;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all var(--transition-normal);
+}
+
+.header-logo-img {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+  transition: transform var(--transition-normal);
+}
+
+.header-logo:hover .header-logo-img {
+  transform: scale(1.05);
+}
+
+.header-nav {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-left: auto;
+  transition: max-height 0.3s, opacity 0.3s;
+}
+
+.nav-link {
+  /* Botão hambúrguer */
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    z-index: 1100;
+  }
+  .hamburger {
+    width: 28px;
+    height: 3px;
+    background: var(--museum-moss-green);
+    display: block;
+    position: relative;
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: var(--museum-moss-green);
+    border-radius: 2px;
+    transition: transform 0.3s, top 0.3s, bottom 0.3s;
+  }
+  .hamburger::before {
+    top: -9px;
+  }
+  .hamburger::after {
+    bottom: -9px;
+  }
+  .menu-toggle.open .hamburger {
+    background: transparent;
+  }
+  .menu-toggle.open .hamburger::before {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .menu-toggle.open .hamburger::after {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+  color: var(--museum-taupe);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  padding: var(--spacing-xs) 0;
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+.nav-link:hover {
+  color: var(--museum-moss-green);
+  transform: translateY(-1px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+  .header-logo {
+    flex: 0 0 auto;
+    justify-content: center;
+    width: auto;
+    order: 1;
+    margin-bottom: 0.5rem;
+  }
+  .header-logo-img {
+    height: 70px;
+    margin: 0 auto;
+    display: block;
+  }
+  .header-nav {
+    position: static;
+    background: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-left: 0;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: none;
+    z-index: auto;
+    transition: none;
+    padding: 0;
+  }
+  .nav-link {
+    font-size: 1.1rem;
+    width: auto;
+    padding: 0.7rem 0.7rem;
+    border-bottom: none;
+    text-align: center;
+  }
+  .language-selector {
+    margin-left: 0.5rem;
+    align-self: center;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-logo-img {
+    height: 60px;
+  }
+  .header-nav.show {
+    padding: 1rem 1rem 1.5rem 1rem;
+  }
+}

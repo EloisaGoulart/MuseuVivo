@@ -1,0 +1,323 @@
+/* ============================================
+   ESTILOS DA PÁGINA HOME
+   ============================================ */
+
+.home-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Seção Hero */
+.hero-section {
+  text-align: center;
+  padding: 3rem 2rem 4.5rem;
+  background: linear-gradient(to bottom, #fdfcfa 0%, #f8f6f2 100%);
+  border-radius: 16px;
+  margin-bottom: 3rem;
+  border: 1px solid rgba(139, 115, 85, 0.15);
+  box-shadow: 0 4px 24px rgba(62, 39, 35, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #8B7355 30%, #B8860B 50%, #8B7355 70%, transparent 100%);
+  opacity: 0.4;
+}
+
+.hero-logo-wrapper {
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.hero-logo {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 12px rgba(139, 115, 85, 0.15));
+  opacity: 0.95;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  font-family: var(--font-serif);
+  color: #3E2723;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  margin: 0 auto 0.6rem;
+  color: #6D4C41;
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  max-width: 650px;
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  margin: 0 auto 2.5rem;
+  color: #8B7355;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  max-width: 600px;
+  letter-spacing: 0.3px;
+  font-style: italic;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.8rem;
+  background: linear-gradient(135deg, #8B7355 0%, #A0826D 100%);
+  color: var(--museum-white) !important;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(139, 115, 85, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-button * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: 0;
+}
+
+.hero-button:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(139, 115, 85, 0.4);
+  background: linear-gradient(135deg, #A0826D 0%, #B8956B 100%);
+  color: var(--museum-white) !important;
+  border-color: rgba(184, 134, 11, 0.5);
+}
+
+/* Seções */
+.featured-section,
+.about-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0 0 3rem 0;
+  text-align: center;
+  color: var(--museum-dark-brown);
+  font-family: 'Garamond', 'Georgia', serif;
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--museum-gold) 0%, var(--museum-bronze) 50%, var(--museum-gold) 100%);
+}
+
+/* Grid de obras */
+.artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+/* Cards sobre o projeto */
+.about-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+.about-card {
+  padding: 2.5rem;
+  background: var(--museum-cream);
+  border-radius: 8px;
+  border: 2px solid var(--museum-bronze);
+  border-left: 6px solid var(--museum-gold);
+  box-shadow: 0 4px 12px rgba(62, 39, 35, 0.1);
+  transition: all 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(62, 39, 35, 0.15);
+  border-left-color: var(--museum-bronze);
+}
+
+.about-card h3 {
+  font-size: 1.3rem;
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+}
+
+.about-card p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .home-page {
+    padding: 1rem;
+  }
+
+  .hero-section {
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .hero-icon-wrapper {
+    padding: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-icon {
+    height: 90px;
+    width: 90px;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-button {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+  }
+
+  .hero-button {
+    font-size: 0.95rem;
+    padding: 0.9rem 1.8rem;
+  }
+
+  .artworks-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding: 0.5rem;
+  }
+
+
+  .hero-section {
+    padding: 2.5rem 1rem 3rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .hero-logo-wrapper {
+    order: 0;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .hero-logo {
+    height: 75px;
+    width: 75px;
+    display: block;
+    margin: 0 auto 0 0;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+    order: 1;
+    margin-top: 0;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    order: 2;
+  }
+
+  .hero-subtitle {
+    order: 3;
+  }
+
+  .hero-button {
+    font-size: 0.85rem;
+    padding: 0.8rem 1.5rem;
+    order: 4;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}

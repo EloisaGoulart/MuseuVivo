@@ -1,0 +1,658 @@
+/* ============================================
+   ESTILOS DA PÁGINA DE MUSEUS - TEMA PROFISSIONAL
+   ============================================ */
+
+.museus-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background: var(--museum-grey-100);
+}
+
+.museus-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xxl);
+  padding: var(--spacing-xl);
+  background: var(--museum-white);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--museum-grey-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.museus-header h1 {
+  font-size: 2.5rem;
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--museum-black);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.museus-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--museum-moss-green);
+  border-radius: 2px;
+}
+
+.museus-header p {
+  color: var(--museum-taupe);
+  font-size: 1.1rem;
+  margin: var(--spacing-md) 0 0 0;
+  font-family: var(--font-sans);
+}
+
+.museus-count {
+  font-weight: 600;
+  color: var(--museum-moss-green) !important;
+  font-size: 1rem !important;
+  margin-top: var(--spacing-sm) !important;
+}
+
+/* Lista de Museus */
+.museus-list {
+  display: flex;
+  gap: var(--spacing-xl);
+  align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+  .museus-list {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  .museum-card-large {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Card Grande de Museu com Imagem */
+.museum-card-large {
+  background: var(--museum-white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  border: 1px solid var(--museum-grey-200);
+  flex: 1;
+  min-width: 0;
+}
+
+.museum-card-large.expanded {
+  flex: 2;
+}
+
+.museum-card-large:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+/* Container da Imagem */
+.museum-image-container {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  background: var(--museum-grey-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.museum-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--transition-slow);
+}
+
+.museum-card-large:hover .museum-image {
+  transform: scale(1.05);
+}
+
+/* Overlay sobre a imagem */
+.museum-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: var(--spacing-lg);
+}
+
+.museum-overlay-title {
+  color: var(--museum-white);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: var(--font-serif);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Conteúdo do Card */
+.museum-content {
+  padding: var(--spacing-lg);
+}
+
+.museum-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.museum-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--museum-black);
+  margin: 0;
+  font-family: var(--font-serif);
+  flex: 1;
+}
+
+.museum-expand-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--museum-moss-green);
+  color: var(--museum-white);
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.museum-expand-btn:hover {
+  background: var(--museum-moss-dark);
+  transform: rotate(90deg);
+}
+
+.museum-card-large.expanded .museum-expand-btn {
+  transform: rotate(180deg);
+  background: var(--museum-moss-dark);
+}
+
+/* Informações Rápidas */
+.museum-quick-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--museum-grey-200);
+}
+
+.museum-location,
+.museum-founded,
+.museum-collection {
+  font-size: 0.9rem;
+  color: var(--museum-taupe);
+  font-family: var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Conteúdo Expansível */
+.museum-expandable {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.museum-card-large.expanded .museum-expandable {
+  max-height: 800px;
+}
+
+.museum-description {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--museum-taupe);
+  margin: var(--spacing-md) 0;
+  font-family: var(--font-sans);
+}
+
+.museum-highlights {
+  background: var(--museum-grey-100);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin: var(--spacing-md) 0;
+  border-left: 4px solid var(--museum-moss-green);
+}
+
+.museum-highlights h4 {
+  font-size: 1.1rem;
+  color: var(--museum-black);
+  margin: 0 0 var(--spacing-sm) 0;
+  font-family: var(--font-sans);
+}
+
+.museum-highlights ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.museum-highlights li {
+  padding: var(--spacing-xs) 0;
+  color: var(--museum-taupe);
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+}
+
+.museum-highlights li::before {
+  content: '→ ';
+  color: var(--museum-moss-green);
+  font-weight: 700;
+  margin-right: var(--spacing-xs);
+}
+
+/* Botão do Website */
+a.museum-website-btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background: var(--museum-moss-green);
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  font-family: var(--font-sans);
+  box-shadow: var(--shadow-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: var(--spacing-md);
+}
+
+a.museum-website-btn:visited,
+a.museum-website-btn:active,
+a.museum-website-btn:focus {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+a.museum-website-btn:hover {
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Seção de Museus Brasileiros */
+.museus-br-section {
+  margin-top: var(--spacing-xxl);
+  border-top: 4px solid var(--museum-moss-green);
+  padding-top: var(--spacing-xl);
+}
+
+.museus-br-section h2 {
+  font-size: 2rem;
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--museum-black);
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+
+.museus-br-section h2::after {
+  display: none;
+}
+
+/* Grid de Museus Brasileiros */
+.museus-grid-br {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+@media (max-width: 900px) {
+  .museus-grid-br {
+    grid-template-columns: 1fr;
+  }
+  .museu-card-br {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .museus-grid-br {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  .museu-card-br {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+/* Card de Museu Brasileiro */
+.museu-card-br {
+  background: var(--museum-white);
+  padding: 0;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  border: 1px solid var(--museum-grey-200);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container de Imagem do Museu Brasileiro */
+.museu-image-container-br {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: var(--museum-grey-100);
+}
+
+.museu-image-br {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.museu-card-br:hover .museu-image-br {
+  transform: scale(1.05);
+}
+
+/* Conteúdo do Card */
+.museu-content-br {
+  padding: var(--spacing-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.museu-card-br::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--museum-moss-green);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.museu-card-br:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--museum-moss-green);
+}
+
+.museu-card-br:hover::before {
+  opacity: 1;
+}
+
+.museu-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.museu-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--museum-black);
+  line-height: 1.4;
+  font-family: var(--font-serif);
+}
+
+.museu-info {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  color: var(--museum-taupe);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: var(--spacing-sm) 0;
+  font-family: var(--font-sans);
+  margin-bottom: 0.1rem;
+  margin-top: 0;
+}
+
+.info-icon {
+  flex-shrink: 0;
+  color: var(--museum-moss-green);
+}
+
+.museu-info-label {
+  font-weight: 600;
+  color: var(--museum-taupe);
+  margin-right: 0.3em;
+  font-size: 0.97em;
+  font-family: var(--font-sans);
+}
+
+/* Link do website dos museus brasileiros */
+a.museu-website {
+  display: inline-block;
+  min-width: 120px;
+  max-width: 180px;
+  box-sizing: border-box;
+  padding: 0.5rem 1.5rem;
+  background: var(--museum-white);
+  border: 2.5px solid var(--museum-gold);
+  border-radius: 12px;
+  font-size: 0.98rem;
+  color: var(--museum-taupe) !important;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(201, 169, 97, 0.10);
+  transition: background 0.22s, border 0.22s, box-shadow 0.22s, color 0.22s;
+  text-align: center;
+  outline: none;
+  text-decoration: none !important;
+  position: relative;
+  white-space: nowrap;
+  cursor: pointer;
+  margin-top: 2.2rem;
+  margin-bottom: 0.5rem;
+  align-self: center;
+}
+a.museu-website:hover, a.museu-website:focus {
+  background: linear-gradient(90deg, var(--museum-gold) 0%, var(--museum-bronze) 100%);
+  color: var(--museum-white) !important;
+  border-color: var(--museum-gold);
+  box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.18);
+}
+
+/* Botão do Site Oficial */
+.official-site-btn {
+  display: inline-block;
+  min-width: 120px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 1.5rem;
+  background: var(--museum-white);
+  border: 2.5px solid var(--museum-gold);
+  border-radius: 12px;
+  font-size: 0.98rem;
+  color: var(--museum-taupe) !important;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(201, 169, 97, 0.10);
+  transition: background 0.22s, border 0.22s, box-shadow 0.22s, color 0.22s;
+  text-align: center;
+  outline: none;
+  text-decoration: none !important;
+  position: relative;
+  white-space: nowrap;
+  cursor: pointer;
+  margin-top: 2.2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  align-self: center;
+}
+
+.official-site-btn:hover, .official-site-btn:focus {
+  background: linear-gradient(90deg, var(--museum-gold) 0%, var(--museum-bronze) 100%);
+  color: var(--museum-white) !important;
+  border-color: var(--museum-gold);
+  box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.18);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .museus-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .museus-page {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .museus-header {
+    padding: var(--spacing-lg);
+  }
+
+  .museus-header h1 {
+    font-size: 2rem;
+  }
+
+  .museus-header p {
+    font-size: 1rem;
+  }
+
+  .museum-image-container {
+    height: 250px;
+  }
+
+  .museum-overlay-title {
+    font-size: 1.5rem;
+  }
+
+  .museum-content {
+    padding: var(--spacing-md);
+  }
+
+  .museum-title {
+    font-size: 1.3rem;
+  }
+
+  .museum-quick-info {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .museus-grid-br {
+    grid-template-columns: 1fr;
+  }
+
+  .museu-card {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .museus-page {
+    padding: var(--spacing-md) var(--spacing-xs);
+  }
+
+  .museus-header {
+    padding: var(--spacing-md);
+  }
+
+  .museus-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .museum-image-container {
+    height: 200px;
+  }
+
+  .museum-overlay {
+    padding: var(--spacing-md);
+  }
+
+  .museum-overlay-title {
+    font-size: 1.2rem;
+  }
+
+  .museum-content {
+    padding: var(--spacing-sm);
+  }
+
+  .museum-title {
+    font-size: 1.1rem;
+  }
+
+  .museu-card {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* Estados de erro e vazio */
+.error-container,
+.no-museus {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.error-container h1 {
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+}
+
+.error-container p {
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.error-note {
+  font-size: 0.9rem !important;
+  color: #999 !important;
+  font-style: italic;
+}
+
+.retry-button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #535bf2;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .museus-header h1 {
+    font-size: 2rem;
+  }
+
+  .museus-grid {
+    grid-template-columns: 1fr;
+  }
+}

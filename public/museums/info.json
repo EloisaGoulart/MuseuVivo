@@ -1,0 +1,38 @@
+{
+  "museums": [
+    {
+      "id": "artic",
+      "name": "Art Institute of Chicago",
+      "shortName": "ARTIC",
+      "location": "Chicago, Illinois, USA",
+      "founded": 1879,
+      "description": "Um dos maiores e mais antigos museus de arte dos Estados Unidos, conhecido por sua impressionante coleção impressionista e pós-impressionista.",
+      "website": "https://www.artic.edu",
+      "imageUrl": "https://www.artic.edu/iiif/2/25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e/full/843,/0/default.jpg",
+      "collection": "300,000+ obras",
+      "highlights": [
+        "A Noite Estrelada sobre o Ródano - Vincent van Gogh",
+        "Um Domingo na Grande Jatte - Georges Seurat",
+        "Nighthawks - Edward Hopper",
+        "American Gothic - Grant Wood"
+      ]
+    },
+    {
+      "id": "met",
+      "name": "Metropolitan Museum of Art",
+      "shortName": "The Met",
+      "location": "New York City, New York, USA",
+      "founded": 1870,
+      "description": "O maior museu de arte dos Estados Unidos e um dos mais visitados do mundo, abrangendo 5.000 anos de arte mundial.",
+      "website": "https://www.metmuseum.org",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP800939.jpg",
+      "collection": "2 milhões+ obras",
+      "highlights": [
+        "Washington Crossing the Delaware - Emanuel Leutze",
+        "The Death of Socrates - Jacques-Louis David",
+        "Terracotta Army",
+        "Egyptian Temple of Dendur"
+      ]
+    }
+  ]
+}

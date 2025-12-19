@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Imagens - Art Institute</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h1 {
+            color: #333;
+        }
+        .image-test {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fafafa;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+            border: 2px solid #606C38;
+        }
+        .url {
+            font-family: monospace;
+            font-size: 12px;
+            color: #666;
+            word-break: break-all;
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        .status {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Teste de Imagens do Art Institute of Chicago</h1>
+        <p>Testando se as imagens IIIF carregam corretamente:</p>
+
+        <div class="image-test">
+            <h3>Teste 1: Image ID fixo</h3>
+            <div class="url">https://www.artic.edu/iiif/2/f4b9d13c-23a8-e651-a25c-56a5c210f054/full/843,/0/default.jpg</div>
+            <img 
+                src="https://www.artic.edu/iiif/2/f4b9d13c-23a8-e651-a25c-56a5c210f054/full/843,/0/default.jpg" 
+                alt="Teste 1"
+                onload="document.getElementById('status1').innerHTML = '✅ Sucesso: Imagem carregada!'; document.getElementById('status1').className = 'status success';"
+                onerror="document.getElementById('status1').innerHTML = '❌ Erro: Não foi possível carregar a imagem'; document.getElementById('status1').className = 'status error';"
+            />
+            <div id="status1" class="status">⏳ Carregando...</div>
+        </div>
+
+        <div class="image-test">
+            <h3>Teste 2: Outro Image ID</h3>
+            <div class="url">https://www.artic.edu/iiif/2/03846c6c-cf41-83dd-f3fe-06ba81b5c193/full/843,/0/default.jpg</div>
+            <img 
+                src="https://www.artic.edu/iiif/2/03846c6c-cf41-83dd-f3fe-06ba81b5c193/full/843,/0/default.jpg" 
+                alt="Teste 2"
+                onload="document.getElementById('status2').innerHTML = '✅ Sucesso: Imagem carregada!'; document.getElementById('status2').className = 'status success';"
+                onerror="document.getElementById('status2').innerHTML = '❌ Erro: Não foi possível carregar a imagem'; document.getElementById('status2').className = 'status error';"
+            />
+            <div id="status2" class="status">⏳ Carregando...</div>
+        </div>
+
+        <div class="image-test">
+            <h3>Teste 3: Thumbnail (400px)</h3>
+            <div class="url">https://www.artic.edu/iiif/2/f4b9d13c-23a8-e651-a25c-56a5c210f054/full/400,/0/default.jpg</div>
+            <img 
+                src="https://www.artic.edu/iiif/2/f4b9d13c-23a8-e651-a25c-56a5c210f054/full/400,/0/default.jpg" 
+                alt="Teste 3"
+                onload="document.getElementById('status3').innerHTML = '✅ Sucesso: Thumbnail carregado!'; document.getElementById('status3').className = 'status success';"
+                onerror="document.getElementById('status3').innerHTML = '❌ Erro: Não foi possível carregar o thumbnail'; document.getElementById('status3').className = 'status error';"
+            />
+            <div id="status3" class="status">⏳ Carregando...</div>
+        </div>
+
+        <h2>📋 Instruções:</h2>
+        <ul>
+            <li>Se você vê as imagens acima, significa que as URLs IIIF estão funcionando corretamente no navegador</li>
+            <li>Se não vê as imagens, pode haver um problema de firewall ou CORS</li>
+            <li>Abra o Console (F12) para ver se há erros</li>
+        </ul>
+    </div>
+
+    <script>
+        console.log('🔍 Teste de imagens iniciado');
+        console.log('Verifique se há erros de CORS ou CSP bloqueando as imagens');
+    </script>
+</body>
+</html>

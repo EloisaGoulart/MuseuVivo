@@ -1,0 +1,435 @@
+/* Espaçamento maior entre resultado da pesquisa e grid de obras */
+.search-info {
+  font-size: 1.1rem;
+  color: var(--museum-taupe);
+  margin: 0 0 2.5rem 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+/* Linha para select de categoria e botão limpar juntos */
+.type-filter-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .type-filter-row {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    width: 100%;
+  }
+  .type-filter-select, .clear-filters-button {
+    width: 100%;
+    max-width: 350px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: center;
+    align-self: center;
+  }
+}
+.type-filter-select {
+  text-align: left;
+  text-align-last: center;
+  appearance: none;
+  background: var(--museum-white);
+  border: 2.5px solid var(--museum-gold);
+  border-radius: 12px;
+  padding: 1rem 2.5rem 1rem 1.2rem;
+  font-size: 1.12rem;
+  color: var(--museum-taupe) !important;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(201, 169, 97, 0.10);
+  transition: background 0.22s, border 0.22s, box-shadow 0.22s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Cpath fill='gold' d='M5 7l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.type-filter-select:hover, .type-filter-select:focus {
+  background: linear-gradient(90deg, var(--museum-gold) 0%, var(--museum-bronze) 100%);
+  color: var(--museum-white) !important;
+  border-color: var(--museum-gold);
+  box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.18);
+  outline: none;
+}
+
+.type-filter-select option {
+  background: var(--museum-white);
+  color: var(--museum-taupe);
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
+  font-family: var(--font-sans);
+  border-radius: 8px;
+  transition: background 0.18s, color 0.18s;
+}
+/* ============================================
+   ESTILOS DA PÁGINA DE OBRAS - TEMA MUSEU CLÁSSICO
+   ============================================ */
+
+.obras-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  background: var(--museum-ivory);
+}
+
+
+.obras-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1rem 0.5rem 1rem;
+  background: var(--museum-cream);
+  border-radius: 8px;
+  border: 2px solid var(--museum-bronze);
+  box-shadow: 0 2px 6px rgba(62, 39, 35, 0.07);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.obras-header h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--museum-dark-brown);
+  font-family: 'Garamond', 'Georgia', serif;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.obras-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--museum-gold) 0%, var(--museum-bronze) 100%);
+}
+
+.obras-header p {
+  color: var(--museum-taupe);
+  font-size: 1rem;
+  margin: 0.9rem 0 0.9rem 0;
+  font-family: 'Georgia', serif;
+  line-height: 1.5;
+}
+
+/* Container Principal de Filtros */
+/* Container Principal de Filtros */
+.filters-container {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .filters-container {
+    gap: 0.5rem;
+  }
+}
+
+/* Responsividade para Filtros - consolidada */
+@media (max-width: 768px) {
+  .type-filter-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1rem;
+    padding: 1.2rem 0.7rem;
+  }
+  .museum-filters {
+    min-width: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.2rem 0.7rem;
+    gap: 1rem;
+  }
+  .filter-button {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+  }
+  .type-filter-select {
+    min-width: 100%;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+/* Filtros de Museu */
+.museum-filters {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  padding: 0.7rem 1.2rem;
+  background: var(--museum-ivory);
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(201, 169, 97, 0.08);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+@media (max-width: 500px) {
+  .museum-filters {
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: stretch;
+  }
+}
+
+.filter-button {
+  padding: 1rem 2.2rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  background: var(--museum-white);
+  color: var(--museum-taupe);
+  border: 2.5px solid var(--museum-gold);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, border 0.25s, box-shadow 0.25s;
+  font-family: var(--font-sans);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  min-width: 320px;
+  max-width: 100%;
+  text-align: center;
+  outline: none;
+}
+
+.filter-button::before {
+  /* Removido para evitar sobreposição do hover sutil */
+}
+
+.filter-button:hover::before {
+  /* Removido para evitar sobreposição do hover sutil */
+}
+
+.filter-button:hover {
+  background: var(--museum-cream);
+  color: var(--museum-taupe);
+  border-color: var(--museum-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(201, 169, 97, 0.10);
+}
+
+.filter-button.active {
+  background: linear-gradient(135deg, var(--museum-gold) 0%, var(--museum-bronze) 100%);
+  color: var(--museum-white);
+  border-color: var(--museum-gold);
+  box-shadow: 0 6px 20px rgba(201, 169, 97, 0.35), inset 0 2px 4px rgba(0,0,0,0.12);
+  font-weight: 700;
+  transform: translateY(-2px);
+}
+
+
+
+/* Botão de Limpar Filtros */
+.clear-filters-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.5rem;
+  background: var(--museum-moss-green);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(62, 39, 35, 0.08);
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--museum-white);
+  margin-left: 0.5rem;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  font-family: var(--font-sans);
+  letter-spacing: 0.3px;
+  min-width: 220px;
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+}
+/* Seletor de dropdown customizado (exemplo, ajuste conforme necessário) */
+.custom-dropdown {
+  font-size: 1.08rem;
+  padding: 0.85rem 1.3rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--museum-moss-green);
+  background: var(--museum-ivory);
+  color: var(--museum-dark-brown);
+  box-shadow: 0 2px 8px rgba(96, 108, 56, 0.08);
+  transition: border 0.2s, box-shadow 0.2s;
+  appearance: none;
+  outline: none;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='gray' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 1.2rem;
+}
+
+.clear-filters-button:hover {
+  background: linear-gradient(135deg, #A0826D 0%, #B8956B 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
+}
+
+/* Resultados */
+  
+
+.obras-results {
+  margin-top: 3rem;
+}
+
+.artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+/* Sem resultados */
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--museum-white) 0%, var(--museum-cream) 100%);
+  border-radius: 12px;
+  border: 2px solid var(--museum-bronze);
+  box-shadow: 0 4px 16px rgba(62, 39, 35, 0.08);
+  max-width: 600px;
+  margin: 3rem auto;
+}
+
+.no-results-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--museum-bronze) 0%, var(--museum-gold) 100%);
+  border-radius: 50%;
+  position: relative;
+}
+
+.no-results-icon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--museum-white);
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+.no-results h3 {
+  font-size: 1.8rem;
+  color: var(--museum-dark-brown);
+  margin: 0 0 1rem 0;
+  font-family: 'Garamond', 'Georgia', serif;
+  font-weight: 700;
+}
+
+.no-results p {
+  font-size: 1.1rem;
+  color: var(--museum-taupe);
+  margin: 0 0 2rem 0;
+  font-family: 'Georgia', serif;
+}
+
+.reload-button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--museum-moss-green);
+  color: var(--museum-white);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-family: var(--font-sans);
+  box-shadow: var(--shadow-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 1.5rem;
+}
+
+.reload-button:hover {
+  background: var(--museum-moss-dark);
+}
+
+/* Responsividade para Filtros */
+@media (max-width: 768px) {
+  .type-filter-section {
+    flex-direction: column;
+    padding: 1.5rem 0.5rem;
+    gap: 1.2rem;
+    align-items: stretch;
+  }
+
+  .filter-label {
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  .type-filter-select {
+    min-width: 100%;
+    width: 100%;
+    font-size: 1.02rem;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .museum-filters {
+    flex-direction: column;
+    padding: 1.5rem 0.5rem;
+    gap: 1.2rem;
+    align-items: stretch;
+  }
+
+  .filter-button {
+    width: 100%;
+    min-width: 0;
+    font-size: 1.02rem;
+    padding: 1rem 1.2rem;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .type-filter-section,
+  .museum-filters {
+    padding: 1.2rem;
+  }
+
+  .filter-label {
+    font-size: 0.95rem;
+  }
+
+  .type-filter-select,
+  .filter-button {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
