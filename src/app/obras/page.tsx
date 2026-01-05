@@ -14,6 +14,14 @@ import { useLanguage } from '@/hooks/useLanguage';
 import './page.css';
 
 export default function ObrasPage() {
+  // Força scroll para o topo ao voltar (mobile e desktop)
+  useEffect(() => {
+    const handlePop = () => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+    window.addEventListener('popstate', handlePop);
+    return () => window.removeEventListener('popstate', handlePop);
+  }, []);
   // Estados principais da página
   const [artworks, setArtworks] = useState<Artwork[]>([]); // Lista de obras
   const [loading, setLoading] = useState(true);             // Se está carregando
