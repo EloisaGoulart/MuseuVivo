@@ -13,7 +13,7 @@
   position: relative;
 }
 
-/* mobile */
+/* Mobile */
 @media (max-width: 600px) {
   .artwork-card {
     max-width: 90vw;
