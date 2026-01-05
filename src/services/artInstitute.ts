@@ -6,7 +6,7 @@ import { translateToPortuguese } from './translate';
 // URL base da API do Art Institute de Chicago
 const ARTIC_API_BASE = 'https://api.artic.edu/api/v1';
 
-// Monta a URL da imagem IIIF (usando proxy local para evitar CORS)
+// Monta a URL da imagem IIIF (usando proxy local)
 function buildImageUrl(imageId: string | null, size: string = '843,'): string {
   if (!imageId) {
     return '';
@@ -33,10 +33,9 @@ function buildThumbnailUrl(imageId: string | null): string {
 function convertToArtwork(articWork: ArticArtwork, highRes: boolean = false): Artwork {
   // Usa alta resolução para detalhes, padrão para listagens
   const imageUrl = highRes 
-    ? buildHighResImageUrl(articWork.image_id)  // Alta resolução para detalhes
-    : buildImageUrl(articWork.image_id);         // Resolução padrão para listagens
+    ? buildHighResImageUrl(articWork.image_id)  
+    : buildImageUrl(articWork.image_id);         
   
-  // ...ARTIC convertendo obra...
   
   return {
     id: articWork.id.toString(),
@@ -126,7 +125,7 @@ export async function getArticArtworkById(id: string): Promise<Artwork | null> {
   }
 }
 
-// Busca obras por termo de pesquisa
+// filtro
 export async function searchArticArtworks(query: string, limit: number = 20): Promise<Artwork[]> {
   try {
     // Busca IDs das obras
@@ -140,7 +139,7 @@ export async function searchArticArtworks(query: string, limit: number = 20): Pr
     const searchData: ArticSearchResponse = await searchResponse.json();
     
     if (!searchData.data || searchData.data.length === 0) return [];
-    // Busca detalhes de cada obra encontrada
+    // Busca detalhes das obras
     const artworkPromises = searchData.data.map(item => 
       getArticArtworkById(item.id.toString())
     );
