@@ -12,16 +12,16 @@ const MUSEUS_BR_API_BASE = 'https://museus.cultura.gov.br/api';
  */
 
 const MUSEUS_FALLBACK: MuseuBrasileiro[] = [
-  { id: '1', name: 'Museu de Arte de São Paulo (MASP)', endereco: 'Av. Paulista, 1578 - São Paulo, SP', telefone: '(11) 3149-5959', website: 'https://masp.org.br', imageUrl: '/museums/br/masp-sp.webp' },
-  { id: '2', name: 'Museu Nacional de Belas Artes', endereco: 'Av. Rio Branco, 199 - Rio de Janeiro, RJ', telefone: '(21) 3299-0600', website: 'https://mnba.gov.br', imageUrl: '/museums/br/belas artes.jpg' },
-  { id: '3', name: 'Museu Imperial', endereco: 'Rua da Imperatriz, 220 - Petrópolis, RJ', telefone: '(24) 2233-0300', website: 'https://museuimperial.gov.br', imageUrl: '/museums/br/museu.imperial.jpg' },
-  { id: '4', name: 'Pinacoteca de São Paulo', endereco: 'Praça da Luz, 2 - São Paulo, SP', telefone: '(11) 3324-1000', website: 'https://pinacoteca.org.br', imageUrl: '/museums/br/pinacoteca.jpg' },
-  { id: '5', name: 'Museu do Amanhã', endereco: 'Praça Mauá, 1 - Rio de Janeiro, RJ', telefone: '(21) 3812-1800', website: 'https://museudoamanha.org.br', imageUrl: '/museums/br/museu.do.amanha.webp' },
-  { id: '6', name: 'Museu Histórico Nacional', endereco: 'Praça Marechal Âncora - Rio de Janeiro, RJ', telefone: '(21) 3299-0324', website: 'https://mhn.museus.gov.br', imageUrl: '/museums/br/museuhistoriconacional.webp' },
-  { id: '7', name: 'Instituto Ricardo Brennand', endereco: 'Alameda Antônio Brennand - Recife, PE', telefone: '(81) 2121-0352', website: 'https://institutoricardobrennand.org.br', imageUrl: '/museums/br/ricardo.brennand.jpg' },
-  { id: '8', name: 'Museu Oscar Niemeyer', endereco: 'Rua Marechal Hermes, 999 - Curitiba, PR', telefone: '(41) 3350-4400', website: 'https://www.museuoscarniemeyer.org.br', imageUrl: '/museums/br/Museu.Osacar.Niemeyer.jpg' },
-  { id: '9', name: 'Museu Afro Brasil', endereco: 'Av. Pedro Álvares Cabral - São Paulo, SP', telefone: '(11) 3320-8900', website: 'http://www.museuafrobrasil.org.br', imageUrl: '/museums/br/Museu.Afro.jpg' },
-  { id: '10', name: 'Museu da Língua Portuguesa', endereco: 'Praça da Luz - São Paulo, SP', telefone: '(11) 3322-0080', website: 'https://museudalinguaportuguesa.org.br', imageUrl: '/museums/br/museu.lingua.portuguesa.webp' },
+  { id: '1', name: 'Museu de Arte de São Paulo (MASP)', endereco: 'Av. Paulista, 1578 - São Paulo, SP', telefone: '(11) 3149-5959', website: 'https://masp.org.br', imageUrl: '/masp-sp.webp' },
+  { id: '2', name: 'Museu Nacional de Belas Artes', endereco: 'Av. Rio Branco, 199 - Rio de Janeiro, RJ', telefone: '(21) 3299-0600', website: 'https://mnba.gov.br', imageUrl: '/belas artes.jpg' },
+  { id: '3', name: 'Museu Imperial', endereco: 'Rua da Imperatriz, 220 - Petrópolis, RJ', telefone: '(24) 2233-0300', website: 'https://museuimperial.gov.br', imageUrl: '/museu.imperial.jpg' },
+  { id: '4', name: 'Pinacoteca de São Paulo', endereco: 'Praça da Luz, 2 - São Paulo, SP', telefone: '(11) 3324-1000', website: 'https://pinacoteca.org.br', imageUrl: '/pinacoteca.jpg' },
+  { id: '5', name: 'Museu do Amanhã', endereco: 'Praça Mauá, 1 - Rio de Janeiro, RJ', telefone: '(21) 3812-1800', website: 'https://museudoamanha.org.br', imageUrl: '/museu.do.amanha.webp' },
+  { id: '6', name: 'Museu Histórico Nacional', endereco: 'Praça Marechal Âncora - Rio de Janeiro, RJ', telefone: '(21) 3299-0324', website: 'https://mhn.museus.gov.br', imageUrl: '/museuhistoriconacional.webp' },
+  { id: '7', name: 'Instituto Ricardo Brennand', endereco: 'Alameda Antônio Brennand - Recife, PE', telefone: '(81) 2121-0352', website: 'https://institutoricardobrennand.org.br', imageUrl: '/ricardo.brennand.jpg' },
+  { id: '8', name: 'Museu Oscar Niemeyer', endereco: 'Rua Marechal Hermes, 999 - Curitiba, PR', telefone: '(41) 3350-4400', website: 'https://www.museuoscarniemeyer.org.br', imageUrl: '/Museu.Osacar.Niemeyer.jpg' },
+  { id: '9', name: 'Museu Afro Brasil', endereco: 'Av. Pedro Álvares Cabral - São Paulo, SP', telefone: '(11) 3320-8900', website: 'http://www.museuafrobrasil.org.br', imageUrl: '/Museu.Afro.jpg' },
+  { id: '10', name: 'Museu da Língua Portuguesa', endereco: 'Praça da Luz - São Paulo, SP', telefone: '(11) 3322-0080', website: 'https://museudalinguaportuguesa.org.br', imageUrl: '/museu.lingua.portuguesa.webp' },
 ];
 
 export async function getMuseusBrasileiros(limit: number = 20): Promise<MuseuBrasileiro[]> {
