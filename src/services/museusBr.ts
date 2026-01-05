@@ -1,28 +1,16 @@
-// ============================================
-// SERVIÇO DE MUSEUS BRASILEIROS
-// ============================================
-// Este arquivo busca informações sobre museus brasileiros
 // API: http://museus.cultura.gov.br/api/
 
 import { MuseuBrasileiro } from '@/types/artwork';
 
-// URL base da API de museus brasileiros
-// NOTA: A API antiga foi descontinuada, retornando dados mockados temporariamente
 const MUSEUS_BR_API_BASE = 'https://museus.cultura.gov.br/api';
 
 // --------------------------------------------
-// BUSCAR LISTA DE MUSEUS
-// --------------------------------------------
 /**
  * Busca lista de museus cadastrados na plataforma do Ministério da Cultura
- * 
- * NOTA: Esta API pode estar instável ou fora do ar às vezes.
- * Em produção, seria bom ter um fallback (alternativa)
- * 
  * @param limit - Máximo de museus para retornar (padrão: 20)
  * @returns Array de museus brasileiros
  */
-// Dados de fallback enquanto a API oficial está fora do ar
+
 const MUSEUS_FALLBACK: MuseuBrasileiro[] = [
   { id: '1', name: 'Museu de Arte de São Paulo (MASP)', endereco: 'Av. Paulista, 1578 - São Paulo, SP', telefone: '(11) 3149-5959', website: 'https://masp.org.br', imageUrl: '/museums/br/masp-sp.webp' },
   { id: '2', name: 'Museu Nacional de Belas Artes', endereco: 'Av. Rio Branco, 199 - Rio de Janeiro, RJ', telefone: '(21) 3299-0600', website: 'https://mnba.gov.br', imageUrl: '/museums/br/belas artes.jpg' },

@@ -1,8 +1,3 @@
-// ============================================
-// HOOK CUSTOMIZADO: USE LANGUAGE
-// ============================================
-// Hook para gerenciar o idioma da aplicação
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -12,7 +7,7 @@ export type Language = 'pt' | 'en';
 export function useLanguage() {
   const [language, setLanguage] = useState<Language>('pt');
 
-  // Carrega idioma salvo ao montar
+  // Carrega idioma salvo 
   useEffect(() => {
     const savedLang = localStorage.getItem('language') as Language | null;
     if (savedLang) {
@@ -20,7 +15,7 @@ export function useLanguage() {
     }
   }, []);
 
-  // Escuta mudanças de idioma de outros componentes
+  // Mudanças de idioma de outros componentes
   useEffect(() => {
     const handleLanguageChange = (event: CustomEvent<Language>) => {
       setLanguage(event.detail);

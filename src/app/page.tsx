@@ -1,28 +1,21 @@
 // ============================================
 // PÁGINA HOME (INICIAL)
 // ============================================
-// Esta é a página inicial do site (rota: /)
-// Mostra uma introdução ao projeto e algumas obras em destaque
 //
 // ARQUITETURA DO PROJETO:
 // - API PRINCIPAL: Art Institute of Chicago (ARTIC)
 //   * Endpoint: https://api.artic.edu/api/v1/artworks
-//   * Fornece obras com image_id que montamos em URL completa
 //   * Campos principais: id, title, artist_display, date_display, image_id
 //
 // - API COMPLEMENTAR: Metropolitan Museum of Art (MET)
 //   * Endpoint: https://collectionapi.metmuseum.org/public/collection/v1
-//   * Primeiro busca IDs, depois detalhes de cada obra
-//   * Usado para enriquecer o catálogo
 //
 // - API DE MUSEUS: MuseusBR (com fallback para dados estáticos)
 //   * Endpoint: http://museus.cultura.gov.br/api/space/find
-//   * Lista museus brasileiros (página /museus)
 //
 // - API DE TRADUÇÃO: LibreTranslate
 //   * Endpoint: https://libretranslate.com/translate
-//   * Traduz conteúdo dinamicamente (PT/EN)
-//   * Com sistema de cache e fallback manual
+//   * Traduz conteúdo (PT/EN)
 
 'use client';
 
@@ -60,14 +53,14 @@ export default function Home() {
   async function loadArtworks() {
     setLoading(true);
     try {
-      // MET Museum: API PRINCIPAL (15 obras em destaque)
-      // Art Institute of Chicago: API COMPLEMENTAR (15 obras em destaque)
+      // MET Museum: API PRINCIPAL 
+      // Art Institute of Chicago: API COMPLEMENTAR 
       const [metArtworks, articData] = await Promise.all([
-        getRandomMetArtworks(30),      // Pegamos 30 para garantir 10 com todas as informações
-        getArticArtworks(1, 40),       // Pegamos 40 para garantir 10 com todas as informações
+        getRandomMetArtworks(30),      
+        getArticArtworks(1, 40),     
       ]);
 
-      // Filtra RIGOROSAMENTE: imagem válida + informações completas
+      // Filtra: imagem válida + informações completas
       const isCompleteArtwork = (artwork: any) => {
         // Validação de imagem
         const hasValidImage = artwork.imageUrl && 
@@ -78,7 +71,7 @@ export default function Home() {
           !artwork.imageUrl.includes('id=undefined') &&
           (artwork.imageUrl.startsWith('/') || artwork.imageUrl.startsWith('http'));
         
-        // Validação de título (evita títulos muito longos com múltiplos nomes/datas)
+        // Validação de título
         const hasTitle = artwork.title && 
           artwork.title.trim() !== '' && 
           artwork.title !== 'Sem título' &&
@@ -103,13 +96,13 @@ export default function Home() {
       const validMetArtworks = metArtworks.filter(isCompleteArtwork);
       const validArticArtworks = articData.artworks.filter(isCompleteArtwork);
 
-      // Total: 10 MET + 10 ARTIC = 20 obras em destaque (apenas com informações completas)
+      // Total: 10 MET + 10 ARTIC = 20 obras em destaque 
       const artworks = [
-        ...validMetArtworks.slice(0, 10),     // 10 obras do MET (principal - DESTAQUE)
-        ...validArticArtworks.slice(0, 10),   // 10 obras do ARTIC (complementar)
+        ...validMetArtworks.slice(0, 10),     // 10 obras do MET (principal)
+        ...validArticArtworks.slice(0, 10),   // 10 obras do ARTIC
       ];
 
-      // Não traduz na homepage - tradução apenas na página de detalhes
+      // Não traduz na homepage 
       setFeaturedArtworks(artworks);
     } catch (error) {
       // ...erro ao carregar obras...
@@ -175,26 +168,3 @@ export default function Home() {
     </div>
   );
 }
-
-// --------------------------------------------
-// CONCEITOS IMPORTANTES:
-// --------------------------------------------
-//
-// 1. ASYNC/AWAIT NO COMPONENTE:
-//    - Em Server Components, podemos usar async diretamente
-//    - Os dados são buscados no servidor antes de renderizar
-//    - O HTML já vem pronto com os dados (melhor para SEO)
-//
-// 2. PROMISE.ALL:
-//    - Executa várias promises em paralelo
-//    - Mais rápido que fazer uma por vez
-//    - Espera todas terminarem antes de continuar
-//
-// 3. SERVER COMPONENT vs CLIENT COMPONENT:
-//    - Server: Roda no servidor, pode buscar dados, não tem interatividade
-//    - Client: Roda no navegador, tem interatividade (useState, onClick)
-//
-// 4. ESTRUTURA DA PÁGINA:
-//    - Hero: Seção principal de destaque
-//    - Featured: Obras em destaque
-//    - About: Informações sobre o projeto

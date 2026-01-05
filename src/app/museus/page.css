@@ -1,7 +1,3 @@
-/* ============================================
-   ESTILOS DA PÁGINA DE MUSEUS - TEMA PROFISSIONAL
-   ============================================ */
-
 .museus-page {
   max-width: 1000px;
   margin: 0 auto;
@@ -73,7 +69,7 @@
   }
 }
 
-/* Card Grande de Museu com Imagem */
+/* Card Museu */
 .museum-card-large {
   background: var(--museum-white);
   border-radius: var(--border-radius-lg);

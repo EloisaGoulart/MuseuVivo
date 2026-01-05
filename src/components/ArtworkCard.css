@@ -1,7 +1,3 @@
-/* ============================================
-   ESTILOS DO ARTWORK CARD - TEMA MUSEU CLÁSSICO
-   ============================================ */
-
 .artwork-card {
   display: flex;
   flex-direction: column;
@@ -17,7 +13,7 @@
   position: relative;
 }
 
-/* Diminui a largura dos cards apenas em telas pequenas (mobile) */
+/* mobile */
 @media (max-width: 600px) {
   .artwork-card {
     max-width: 90vw;

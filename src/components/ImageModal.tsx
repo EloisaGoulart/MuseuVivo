@@ -31,7 +31,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
       : 'Use mouse wheel to zoom • Drag to move',
   };
 
-  // Fecha com ESC
+  // Fecha ao pressionar ESC
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -40,7 +40,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
     return () => window.removeEventListener('keydown', handleEsc);
   }, [onClose]);
 
-  // Previne scroll do body quando modal aberto
+  // Previne scroll do body quando modal está aberto
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
@@ -48,30 +48,30 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
     };
   }, []);
 
-  // Zoom com scroll do mouse (desktop) - centralizado no cursor
+  // Zoom com scroll do mouse (desktop)
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
     
-    // Oculta hint após primeiro zoom
+    // Oculta dica após primeiro zoom
     if (showHint) setShowHint(false);
     
     const delta = e.deltaY > 0 ? -0.1 : 0.1;
     const newZoom = Math.max(0.5, Math.min(10, zoom + delta));
     
     if (newZoom !== zoom) {
-      // Se o zoom está voltando para 1 ou menos, centraliza completamente
+      // Se o zoom volta para 1 ou menos, centraliza
       if (newZoom <= 1) {
         setZoom(1);
         setPosition({ x: 0, y: 0 });
         return;
       }
       
-      // Pega a posição do mouse em relação ao container
+      // Pega posição do mouse em relação ao container
       const rect = e.currentTarget.getBoundingClientRect();
       const mouseX = e.clientX - rect.left - rect.width / 2;
       const mouseY = e.clientY - rect.top - rect.height / 2;
       
-      // Calcula a nova posição para manter o ponto sob o cursor fixo
+      // Mantém o ponto sob o cursor fixo
       const zoomRatio = newZoom / zoom;
       setPosition({
         x: mouseX - (mouseX - position.x) * zoomRatio,
@@ -82,7 +82,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
     }
   };
 
-  // Controles de zoom - centralizado
+  // Controles de zoom
   const zoomIn = () => {
     const newZoom = Math.min(10, zoom + 0.25);
     if (newZoom !== zoom) {
@@ -99,7 +99,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
   const zoomOut = () => {
     const newZoom = Math.max(0.5, zoom - 0.25);
     if (newZoom !== zoom) {
-      // Se for voltar para 1 ou menos, centraliza completamente
+      // Se voltar para 1 ou menos, centraliza
       if (newZoom <= 1) {
         setZoom(1);
         setPosition({ x: 0, y: 0 });
@@ -122,7 +122,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
     setShowHint(true);
   };
 
-  // Drag para mover quando com zoom
+  // Arrasta para mover quando com zoom
   const handleMouseDown = (e: React.MouseEvent) => {
     if (zoom > 1) {
       setIsDragging(true);
@@ -148,7 +148,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
     setIsDragging(false);
   };
 
-  // Touch handlers para mobile (pinch e drag)
+  // Pinça e arrasta no mobile
   const getTouchDistance = (touches: React.TouchList) => {
     if (touches.length < 2) return 0;
     const touch1 = touches[0];
@@ -163,11 +163,11 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
     e.preventDefault();
     e.stopPropagation();
     if (e.touches.length === 2) {
-      // Pinch zoom
+      // Pinça para zoom
       const distance = getTouchDistance(e.touches);
       setLastTouchDistance(distance);
     } else if (e.touches.length === 1) {
-      // Single touch drag
+      // Arrasta com um dedo
       setIsDragging(true);
       setDragStart({
         x: e.touches[0].clientX - position.x,
@@ -180,7 +180,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
     e.preventDefault();
     e.stopPropagation();
     if (e.touches.length === 2) {
-      // Pinch zoom - até 1000% como no desktop
+      // Pinça para zoom (até 1000%)
       const distance = getTouchDistance(e.touches);
       if (lastTouchDistance > 0) {
         if (showHint) setShowHint(false);
@@ -188,13 +188,13 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
         const delta = (distance - lastTouchDistance) * 0.02; // Aumentada sensibilidade para 0.02
         const newZoom = Math.max(0.5, Math.min(10, zoom + delta));
         
-        // Centraliza progressivamente ao desfazer o zoom
+        // Centraliza ao desfazer o zoom
         if (newZoom <= 1.01) {
           setZoom(1);
           setPosition({ x: 0, y: 0 });
           setShowHint(true);
         } else {
-          // Ao reduzir o zoom, aproxima a posição do centro
+          // Ao reduzir o zoom, aproxima do centro
           if (newZoom < zoom) {
             setPosition(pos => ({
               x: pos.x * (newZoom / zoom),
@@ -206,7 +206,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
       }
       setLastTouchDistance(distance);
     } else if (e.touches.length === 1 && isDragging) {
-      // Single touch drag com limites
+      // Arrasta com um dedo (com limites)
       const newX = e.touches[0].clientX - dragStart.x;
       const newY = e.touches[0].clientY - dragStart.y;
       
@@ -270,7 +270,7 @@ export default function ImageModal({ src, alt, onClose, language = 'pt' }: Image
         />
       </div>
 
-      {/* Hint - mostra apenas quando zoom está em 1 e showHint é true */}
+      {/* Dica de uso - só aparece quando zoom está em 1 */}
       {showHint && zoom === 1 && (
         <p className="zoom-hint">
           {window.matchMedia('(max-width: 768px)').matches 

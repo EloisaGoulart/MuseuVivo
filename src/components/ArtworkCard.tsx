@@ -1,18 +1,12 @@
-// ============================================
-// COMPONENTE: ARTWORK CARD (CARTÃO DE OBRA)
-// ============================================
-// Este componente exibe uma obra de arte em formato de cartão
-// Mostra imagem, título, artista e permite clicar para ver detalhes
-
 import Link from 'next/link';
 import { Artwork } from '@/types/artwork';
 import './ArtworkCard.css';
 
 // --------------------------------------------
-// PROPS DO COMPONENTE
+// PROPS 
 // --------------------------------------------
 interface ArtworkCardProps {
-  artwork: Artwork;  // Os dados da obra que vamos exibir
+  artwork: Artwork;  // Os dados da obra 
   language?: 'pt' | 'en';  // Idioma para tradução
 }
 
@@ -66,26 +60,4 @@ export default function ArtworkCard({ artwork, language = 'pt' }: ArtworkCardPro
     </Link>
   );
 }
-
-// --------------------------------------------
-// CONCEITOS IMPORTANTES:
-// --------------------------------------------
-//
-// 1. Image (next/image):
-//    - Componente do Next.js que otimiza imagens automaticamente
-//    - Lazy loading: só carrega quando aparecer na tela
-//    - Redimensiona automaticamente
-//    - Melhora performance do site
-//
-// 2. fill:
-//    - Faz a imagem preencher todo o container pai
-//    - O container precisa ter position: relative
-//
-// 3. Conditional Rendering (Renderização Condicional):
-//    - {artwork.imageUrl ? ... : ...}: if/else em JSX
-//    - {artwork.date && ...}: só mostra se existir
-//
-// 4. Link:
-//    - Navega para /obras/[id] onde [id] é o ID da obra
-//    - Toda navegação interna deve usar Link (não <a>)
 

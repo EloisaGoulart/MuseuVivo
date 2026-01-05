@@ -26,6 +26,8 @@ export default function RootLayout({
             : 'Explore thousands of artworks from the world\'s greatest museums. Art Institute of Chicago and Metropolitan Museum.'
           } 
         />
+        <link rel="icon" type="image/png" href="/assets/icon.png" />
+        <link rel="shortcut icon" href="/assets/icon.png" type="image/png" />
       </head>
       <body>
         <Header />

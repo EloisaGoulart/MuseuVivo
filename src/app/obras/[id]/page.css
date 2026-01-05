@@ -1,3 +1,10 @@
+@media (min-width: 1600px) {
+  .obra-content {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 /* ============================================
    ESTILOS DA PÁGINA DE DETALHES - TEMA MUSEU CLÁSSICO
    ============================================ */

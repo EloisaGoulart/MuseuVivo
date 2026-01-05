@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const cache = new Map<string, string>();
 
 /**
- * Traduz usando Google Translate (API gratuita via endpoint público)
+ * Traduz usando Google Translate
  */
 async function translateWithGoogleAPI(
   text: string,
@@ -49,7 +49,7 @@ async function translateWithGoogleAPI(
   }
 }
 
-// Dicionário de tradução para termos de arte (BACKUP RÁPIDO - 300+ termos)
+// Dicionário de tradução para termos de arte 
 const dictionary: Record<string, string> = {
   // Técnicas e Materiais
   'oil on canvas': 'óleo sobre tela',

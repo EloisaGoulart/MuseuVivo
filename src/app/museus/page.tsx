@@ -1,9 +1,3 @@
-// ============================================
-// PÁGINA DE MUSEUS
-// ============================================
-// Rota: /museus
-// Esta página mostra museus internacionais (ARTIC e MET) e brasileiros
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -107,7 +101,7 @@ export default function MuseusPage() {
     visitSite: language === 'pt' ? 'Visitar Site' : 'Visit Website',
   };
 
-  // Carregar museus brasileiros ao montar o componente
+  // Carregar museus brasileiros 
   useEffect(() => {
     loadMuseusBrasileiros();
   }, []);
@@ -124,7 +118,7 @@ export default function MuseusPage() {
     try {
       const data = await getMuseusBrasileiros(10);
       
-      // Traduz endereços para inglês se necessário
+      // Traduz endereços para inglês 
       if (language === 'en') {
         const translatedData = await Promise.all(
           data.map(async (museu) => {
@@ -250,7 +244,6 @@ export default function MuseusPage() {
         <div className="museus-grid-br">
           {museusBr.map((museu) => (
             <div key={museu.id} className="museu-card-br">
-              {/* Imagem do Museu Brasileiro */}
               {museu.imageUrl && (
                 <div className="museu-image-container-br">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -296,28 +289,3 @@ export default function MuseusPage() {
     </div>
   );
 }
-
-// --------------------------------------------
-// CONCEITOS IMPORTANTES:
-// --------------------------------------------
-//
-// 1. TRATAMENTO DE ERRO:
-//    - Sempre bom ter um estado de erro
-//    - Mostra mensagem amigável ao usuário
-//    - Oferece opção de tentar novamente
-//
-// 2. ESTADOS DE UI:
-//    - Loading: mostra spinner
-//    - Error: mostra mensagem de erro
-//    - Success: mostra conteúdo
-//    - Empty: mostra mensagem de vazio
-//
-// 3. CONDITIONAL RENDERING COM &&:
-//    - {condition && <Component />}
-//    - Só renderiza se condition for true
-//    - Útil para campos opcionais
-//
-// 4. MAP PARA LISTAS:
-//    - .map() transforma cada item em JSX
-//    - key={} é obrigatório para performance
-//    - React usa a key para identificar mudanças

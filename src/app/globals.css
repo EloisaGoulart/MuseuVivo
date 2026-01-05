@@ -35,15 +35,8 @@ body, #__next, .main-container, .container {
     overflow-x: hidden;
   }
 }
-/* ============================================
-   ESTILOS GLOBAIS - TEMA MUSEU CLÁSSICO
-   ============================================
-   Este arquivo contém estilos que se aplicam a TODO o site
-   - Reset de estilos padrão do navegador
-   - Variáveis CSS (cores, tamanhos)
-   - Estilos base para elementos HTML
-   
-   PALETA DE CORES CLÁSSICA:
+/* 
+   PALETA DE CORES:
    - Marfim: #F5F1E8 (fundo principal)
    - Marrom Escuro: #3E2723 (textos principais)
    - Bronze: #A67C52 (acentos e bordas)

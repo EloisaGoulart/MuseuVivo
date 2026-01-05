@@ -1,6 +1,3 @@
-// Rota de API para proxying de imagens do Art Institute
-// Isso resolve problemas de CORS
-
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -14,12 +11,10 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Constrói a URL da imagem IIIF
+    // URL da imagem 
     const imageUrl = `https://www.artic.edu/iiif/2/${imageId}/full/${size}/0/default.jpg`;
-    
-    // ...proxy buscando imagem...
 
-    // Busca a imagem do Art Institute com headers apropriados
+    // Busca a imagem do Art Institute
     const imageResponse = await fetch(imageUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -30,9 +25,8 @@ export async function GET(request: NextRequest) {
     });
 
     if (!imageResponse.ok) {
-      // ...proxy erro ao buscar imagem...
       
-      // Retorna imagem placeholder transparente (1x1 pixel)
+      // Retorna imagem placeholder transparente
       const placeholderSvg = `<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
         <rect width="400" height="400" fill="#f0f0f0"/>
         <text x="50%" y="50%" text-anchor="middle" font-size="16" fill="#999">Imagem indisponível</text>
@@ -48,8 +42,6 @@ export async function GET(request: NextRequest) {
 
     // Pega o buffer da imagem
     const imageBuffer = await imageResponse.arrayBuffer();
-    
-    // ...proxy imagem carregada com sucesso...
 
     // Retorna a imagem com headers corretos
     return new NextResponse(imageBuffer, {
@@ -59,7 +51,6 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    // ...proxy exceção ao buscar imagem...
     
     // Retorna SVG placeholder em caso de erro
     const errorSvg = `<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">

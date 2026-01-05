@@ -1,14 +1,5 @@
-// ============================================
-// SERVIÇO DE TRADUÇÃO - Cliente
-// ============================================
-// Chama a API de tradução no servidor
-
-// Cache de traduções para evitar chamadas repetidas
 const cache = new Map<string, string>();
 
-/**
- * Traduz texto entre inglês e português
- */
 export async function translate(
   text: string,
   sourceLang: 'en' | 'pt' = 'en',

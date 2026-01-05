@@ -1,35 +1,5 @@
-// ============================================
-// PÁGINA DE LISTA DE OBRAS
-// ============================================
-// Rota: /obras
-// Esta página mostra todas as obras disponíveis com busca e filtros
-//
-// FLUXO DE DADOS:
-// 1. Carregamento Inicial (useEffect):
-//    - Busca 20 obras do Art Institute of Chicago (API principal)
-//    - Busca 5 obras do MET Museum (API complementar)
-//    - Combina e exibe total de 25 obras
-//
-// 2. Busca por Termo (SearchBar):
-//    - Pesquisa 15 resultados no ARTIC
-//    - Pesquisa 5 resultados no MET
-//    - Total de até 20 resultados combinados
-//
-// 3. Filtro por Museu:
-//    - Botões permitem filtrar apenas ARTIC ou apenas MET
-//    - Filtro "Todos" mostra obras de ambas as APIs
-//
-// 4. Tradução Automática:
-//    - Se idioma = PT, traduz títulos e artistas
-//    - Usa LibreTranslate + fallback manual
-//    - Cache evita traduções repetidas
-//
-// 5. Página de Detalhes:
-//    - Ao clicar em card, vai para /obras/[id]
-//    - ARTIC: https://api.artic.edu/api/v1/artworks/{id}
-//    - MET: https://collectionapi.metmuseum.org/.../objects/{id}
 
-'use client'; // Client Component porque precisa de interatividade (busca, estados)
+'use client';
 
 import { useState, useEffect } from 'react';
 import ArtworkCard from '@/components/ArtworkCard';
@@ -44,10 +14,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import './page.css';
 
 export default function ObrasPage() {
-  // --------------------------------------------
-  // ESTADOS (States)
-  // --------------------------------------------
-  // Estados guardam informações que podem mudar ao longo do tempo
+  // Estados principais da página
   const [artworks, setArtworks] = useState<Artwork[]>([]); // Lista de obras
   const [loading, setLoading] = useState(true);             // Se está carregando
   const [searchQuery, setSearchQuery] = useState('');       // Termo de busca
@@ -56,16 +23,12 @@ export default function ObrasPage() {
   const [availableTypes, setAvailableTypes] = useState<Set<string>>(new Set(['all'])); // Tipos disponíveis
   const language = useLanguage(); // Idioma atual
 
-  // --------------------------------------------
-  // EFFECT: SCROLL PARA O TOPO
-  // --------------------------------------------
+  // Scroll para o topo ao montar
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
-  // --------------------------------------------
-  // EFFECT: RECUPERAR FILTROS SALVOS
-  // --------------------------------------------
+  // Recupera filtros salvos do sessionStorage
   useEffect(() => {
     // Recupera filtros salvos do sessionStorage
     const savedMuseum = sessionStorage.getItem('filter-museum') as 'all' | 'artic' | 'met' | null;
@@ -77,11 +40,7 @@ export default function ObrasPage() {
     if (savedQuery) setSearchQuery(savedQuery);
   }, []);
 
-  // --------------------------------------------
-  // EFFECT: CARREGAR OBRAS INICIAIS
-  // --------------------------------------------
-  // useEffect é executado quando o componente é montado (aparece na tela)
-  // O array [] no final significa "executar apenas uma vez"
+  // Carrega obras iniciais ao montar
   useEffect(() => {
     const savedQuery = sessionStorage.getItem('filter-query');
     if (savedQuery && savedQuery.trim()) {
@@ -91,7 +50,7 @@ export default function ObrasPage() {
     }
   }, []);
   
-  // Sempre recarrega e traduz as obras ao mudar o idioma
+  // Recarrega/traduz obras ao mudar idioma
   useEffect(() => {
     if (searchQuery) {
       handleSearch(searchQuery);
@@ -100,7 +59,7 @@ export default function ObrasPage() {
     }
   }, [language]);
 
-  // Função para detectar tipos de obra disponíveis - Sistema inteligente
+  // Detecta tipos de obra disponíveis
   function detectAvailableTypes(works: Artwork[]) {
     const types = new Set<string>(['all']);
     
@@ -221,8 +180,7 @@ export default function ObrasPage() {
     setAvailableTypes(types);
   }
 
-  // Função para carregar obras iniciais (sem busca)
-  // PRIORIDADE: MET Museum (20 obras) + Art Institute of Chicago (20 obras) como complemento
+  // Carrega obras iniciais (sem busca)
   async function loadInitialArtworks() {
     setLoading(true);
     try {
@@ -236,9 +194,9 @@ export default function ObrasPage() {
         getArticArtworks(1, articLimit),
       ]);
       
-      // ...carregadas obras MET e ARTIC...
+      // Obras MET e ARTIC carregadas
       
-      // Filtra RIGOROSAMENTE: imagem válida + informações completas
+      // Filtra: imagem válida + informações completas
       const isCompleteArtwork = (artwork: any) => {
         // Validação de imagem
         const hasValidImage = artwork.imageUrl && 
@@ -249,7 +207,7 @@ export default function ObrasPage() {
           !artwork.imageUrl.includes('id=undefined') &&
           (artwork.imageUrl.startsWith('/') || artwork.imageUrl.startsWith('http'));
         
-        // Validação de título (evita títulos muito longos com múltiplos nomes/datas)
+        // Validação de título
         const hasTitle = artwork.title && 
           artwork.title.trim() !== '' && 
           artwork.title !== 'Sem título' &&
@@ -261,7 +219,7 @@ export default function ObrasPage() {
           artwork.artist !== 'Desconhecido' && 
           artwork.artist !== 'Unknown';
         
-        // Filtro adicional: evita obras com títulos que contêm múltiplos anos/datas (ex: 1428–1501)
+        // Evita títulos com múltiplos anos/datas
         const hasMultipleDates = artwork.title && /\d{4}[–-]\d{4}/.test(artwork.title);
         
         return hasValidImage && hasTitle && hasArtist && !hasMultipleDates;
@@ -270,7 +228,7 @@ export default function ObrasPage() {
       const validMetArtworks = metArtworks.filter(isCompleteArtwork);
       const validArticArtworks = articData.artworks.filter(isCompleteArtwork);
       
-      // Combinamos as obras (MET primeiro, depois ARTIC)
+      // Junta as obras (MET primeiro, depois ARTIC)
       let combined = [...validMetArtworks, ...validArticArtworks];
       
       // Traduz se o idioma for português
@@ -278,19 +236,17 @@ export default function ObrasPage() {
         combined = await translateArtworks(combined);
       }
       
-      // ...total de obras a serem exibidas...
+      // Total de obras a exibir
       setArtworks(combined);
       detectAvailableTypes(combined);
     } catch (error) {
-      // ...erro ao carregar obras...
+      // Erro ao carregar obras
     } finally {
-      setLoading(false); // finally sempre executa, dê erro ou não
+      setLoading(false); // always executa
     }
   }
 
-  // --------------------------------------------
-  // FUNÇÃO AUXILIAR: TRADUZIR OBRAS
-  // --------------------------------------------
+  // Traduz obras se necessário
   async function translateArtworks(works: Artwork[]): Promise<Artwork[]> {
     // Só traduz se o idioma global for português
     if (language !== 'pt') {
@@ -320,13 +276,12 @@ export default function ObrasPage() {
       );
       return translated;
     } catch (error) {
-      // ...erro ao traduzir algumas obras...
       return works;
     }
   }
 
   // --------------------------------------------
-  // FUNÇÃO AUXILIAR: CALCULAR RELEVÂNCIA
+  //  CALCULAR RELEVÂNCIA
   // --------------------------------------------
   function calculateRelevance(artwork: Artwork, searchQuery: string): number {
     const query = searchQuery.toLowerCase().trim();
@@ -381,8 +336,7 @@ export default function ObrasPage() {
   // --------------------------------------------
   // FUNÇÃO DE BUSCA
   // --------------------------------------------
-  // Esta função é chamada quando o usuário faz uma busca
-  // PRIORIDADE: Busca principalmente no MET Museum (10 obras) + Art Institute of Chicago (15 obras)
+  // PRIORIDADE: Busca principalmente no MET Museum + Art Institute of Chicago
   async function handleSearch(query: string) {
     setSearchQuery(query);
     sessionStorage.setItem('filter-query', query);
@@ -406,7 +360,7 @@ export default function ObrasPage() {
         searchArticArtworks(query, 30),     // COMPLEMENTAR: 30 do ARTIC
       ]);
 
-      // Filtra RIGOROSAMENTE: imagem válida + informações completas
+      // Filtra imagem válida 
       const isCompleteArtwork = (artwork: any) => {
         const hasValidImage = artwork.imageUrl && 
           artwork.imageUrl.trim() !== '' &&
@@ -449,7 +403,7 @@ export default function ObrasPage() {
       if (language === 'pt') {
         combined = await translateArtworks(combined);
       }
-      // Se idioma for inglês, mantém os dados originais (sem tradução)
+      // Se idioma for inglês, mantém os dados originais 
       setArtworks(combined);
       detectAvailableTypes(combined);
     } catch (error) {
@@ -628,7 +582,7 @@ export default function ObrasPage() {
   // --------------------------------------------
   return (
     <>
-      {/* <Header /> Removido porque já está no layout global */}
+      {/* <Header */}
       <div className="obras-page">
       <div className="obras-header">
         <h1>{labels.title}</h1>
@@ -671,7 +625,7 @@ export default function ObrasPage() {
           </button>
         </div>
 
-        {/* Filtro de Tipo de Obra - Mostrar APENAS quando há busca */}
+        {/* Filtro de Tipo de Obra */}
         {searchQuery.trim() !== '' && (
         <div className="type-filter-section">
           <div className="type-filter-row">
@@ -700,7 +654,7 @@ export default function ObrasPage() {
               {availableTypes.has('modern') && <option value="modern">{labels.modern}</option>}
               {availableTypes.has('manuscript') && <option value="manuscript">{labels.manuscript}</option>}
             </select>
-            {/* Botão de Limpar Filtros ao lado do select */}
+            {/* Botão de Limpar Filtros */}
             {hasActiveFilters && (
               <button onClick={clearFilters} className="clear-filters-button">
                 {labels.clearFilters}
@@ -748,28 +702,3 @@ export default function ObrasPage() {
     </>
   );
 }
-
-// --------------------------------------------
-// CONCEITOS IMPORTANTES:
-// --------------------------------------------
-//
-// 1. CLIENT COMPONENT ('use client'):
-//    - Necessário porque usamos useState, useEffect, onClick
-//    - Roda no navegador, pode ter interatividade
-//
-// 2. useEFFECT:
-//    - Hook para efeitos colaterais (buscar dados, timers, etc)
-//    - [] vazio = executa apenas uma vez (quando monta)
-//    - [dep] = executa quando dep mudar
-//
-// 3. ASYNC/AWAIT em funções:
-//    - Não podemos usar async direto no componente Client
-//    - Criamos funções assíncronas separadas
-//
-// 4. CONDITIONAL RENDERING:
-//    - loading ? <Loading /> : <Content />
-//    - Mostra componentes diferentes baseado em condições
-//
-// 5. FILTRO:
-//    - .filter() cria novo array com elementos que passam no teste
-//    - Filtramos as obras por museu selecionado
